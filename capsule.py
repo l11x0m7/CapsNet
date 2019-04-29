@@ -62,7 +62,7 @@ class Mask(layers.Layer):
         if type(inputs) is list or tuple:
             inputs, mask = inputs
         else:
-            pred = K.sqrt(K.sum(K.square(s), axis=-1) + K.epsilon())
+            pred = K.sqrt(K.sum(K.square(inputs), axis=-1) + K.epsilon())
             mask = K.one_hot(indices=K.argmax(pred, 1), num_classes=pred.get_shape().as_list()[1])
         return K.batch_flatten(inputs * K.expand_dims(mask, axis=-1))
 
